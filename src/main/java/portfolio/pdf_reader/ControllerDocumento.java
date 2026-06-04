@@ -57,12 +57,29 @@ public class ControllerDocumento {
     }
 
     // buscar en vectores
-
     @GetMapping("/buscar")
-    public List<String> buscar(@RequestParam String query) {
-        return servicioIa.buscarEnVectores(query).stream()
-                .map(Document::getText) // <--- Cambia getContent() por getText()
-                .toList();
+public String buscarYResponder(@RequestParam String query) {
+    // 1. Usamos tu logica actual para recuperar los fragmentos (Contexto)
+    List<String> fragmentos = servicioIa.buscarEnVectores(query).stream()
+            .map(Document::getText)
+            .toList();
+
+    // 2. Si no encontramos nada, devolvemos un mensaje claro
+    if (fragmentos.isEmpty()) {
+        return "No he encontrado información relevante sobre eso en tus documentos.";
     }
+
+    // 3. Unimos los fragmentos para crear un contexto sólido
+    String contexto = String.join("\n", fragmentos);
+
+    // 4. Creamos el prompt para la IA
+    String prompt = String.format(
+        "Eres un asistente útil. Usa el siguiente contexto para responder a la pregunta del usuario. " +
+        "Contexto:\n%s\n\n" +
+        "Pregunta del usuario: %s", contexto, query);
+
+    // 5. Devolvemos la respuesta procesada por Llama3
+    return chatModel.call(prompt);
+}
 
 }

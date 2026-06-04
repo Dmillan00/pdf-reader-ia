@@ -1,0 +1,13 @@
+# docker-compose.yml
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: postgre-ai
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: pdf_reader
+    ports:
+      - "5432:5432"
+    # Esto asegura que la extensión vector esté disponible al iniciar
+    command: ["postgres", "-c", "shared_preload_libraries=vector"]
