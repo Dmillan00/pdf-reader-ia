@@ -14,15 +14,13 @@ public class ControllerDocumento {
 
     // Declaramos el chat ia
 
-    private final ServicioDocumento servicioDocumento;
     private final ServicioIa servicioIa;
     private final OllamaChatModel chatModel;
 
     // lo inyectamos como dependenica en la clase
 
-    public ControllerDocumento(OllamaChatModel chatModel, ServicioDocumento servicioDocumento, ServicioIa servicioIa) {
+    public ControllerDocumento(OllamaChatModel chatModel, ServicioIa servicioIa) {
         this.chatModel = chatModel;
-        this.servicioDocumento = servicioDocumento;
         this.servicioIa = servicioIa;
     }
 
@@ -31,21 +29,6 @@ public class ControllerDocumento {
             @RequestParam(value = "mensaje", defaultValue = "Presentate en uan frase") String mensaje) {
         // mandar el mensaje a la IA y devolvemos lo que mande
         return chatModel.call(mensaje);
-    }
-
-    // guardar documento
-    @GetMapping("/guardarDocumento")
-    public String guardarDocumento(@RequestParam(value = "nombre") String nombre,
-            @RequestParam(value = "contenido") String contenido) {
-        servicioDocumento.guardarDocumento(nombre, contenido);
-        return "!Documento guardado";
-    }
-
-    // mostrat documentos guardados
-
-    @GetMapping("/mostrarDocumento")
-    public List<Documento> mostrarDocumentos() {
-        return servicioDocumento.listarDocumentos();
     }
 
     // guardar vector

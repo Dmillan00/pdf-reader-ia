@@ -15,8 +15,6 @@ public class ServicioIa {
         this.vectorStore = vectorStore;
     }
 
-   
-
     //guardar fragmento de texto convertido a vector
     public void guardarTextoEnVectores(String texto){
         Document documentoIa = new Document(texto);
