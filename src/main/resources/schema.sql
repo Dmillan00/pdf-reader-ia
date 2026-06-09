@@ -1,8 +1,7 @@
--- src/main/resources/schema.sql
--- Esto crea la extensión de vectores en la base de datos si no existe
+-- Creanmos la extension para poder unsar el tipo de datos vector para guargar los embeddings de texto
 CREATE EXTENSION IF NOT EXISTS vector;
 
--- Esto crea tu tabla de vectores automáticamente
+-- Esquema de la tabla que se creara automaticamente al iniciar la aplicacion, esta tabla se usara para guardar los embeddings de texto y su metadata asociada
 CREATE TABLE IF NOT EXISTS vector_store (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     content TEXT,

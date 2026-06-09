@@ -1,4 +1,4 @@
-# docker-compose.yml
+# Archivo docker-compose.yml para configurar un contenedor de PostgreSQL con la extensión pgvector
 services:
   postgres:
     image: pgvector/pgvector:pg16
