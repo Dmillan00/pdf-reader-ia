@@ -1,0 +1,67 @@
+body {
+  background-color: #264653 !important;
+  color: #a9ddd6 !important;
+}
+
+header {
+  text-align: center;
+  padding: 20px;
+  background-color: #13242a;
+}
+
+.btn{
+    background-color: #13242a;
+}
+
+/* Estilos para el contenedor de subir PDF */
+.contenedor-subir-pdf {
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  margin-right: 20px;
+}
+
+.subir-pdf {
+  background-color: #23424e;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+form {
+   background-color: #264653;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para el contenedor de chat */
+.tarjeta {
+  display: flex;
+  flex-direction: column;
+  height: 750px;
+  width: 100%;
+  max-width: 800px;
+  background-color: #13242a;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.chat {
+  flex-grow: 1;
+  overflow-y: auto;
+    min-height: 400px;
+  padding-right: 5px;
+}
+
+.cabecera {
+  color: white;
+  font-size: 1.25rem;
+  font-weight: bold;
+  padding-bottom: 10px;
+}
+
+.footer {
+  margin-top: auto;
+}

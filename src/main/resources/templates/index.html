@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <title>Asistente IA para lectura de PDF</title>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+    <header>
+        <h1>Asistente IA para lectura de PDF</h1>
+    </header>
+
+    <div class="container">
+        <div class="row min-vh-100">
+            <div class="col-md-5 d-flex flex-column align-items-center justify-content-center">
+                <div class="contenedor-subir-pdf d-flex flex-column align-items-center justify-content-center"
+                    style="max-width: 550px">
+                    <h2 class="text-white text-center mb-4">Sube tu PDF</h2>
+
+                    <form th:action="@{/cargar-pdf}" method="post" enctype="multipart/form-data"
+                        class="d-flex flex-column align-items-center subir-pdf my-auto" style="width: 100%">
+                        <div class="mb-4 w-100">
+                            <input type="file" class="form-control border border-dark" name="archivo" required />
+                        </div>
+                        <button type="submit" class="btn btn-dark w-100">
+                            Cargar PDF
+                        </button>
+                    </form>
+
+                    <div th:if="${mensajeExito}" class="alert alert-success mt-3 w-100" th:text="${mensajeExito}"></div>
+                    <div th:if="${mensajeError}" class="alert alert-danger mt-3 w-100" th:text="${mensajeError}"></div>
+                </div>
+            </div>
+
+            <div class="col-md-7 d-flex align-items-center justify-content-center text-white ">
+
+                <!-- CHAT IA -->
+                <div class="col-md-7 d-flex align-items-center justify-content-center ">
+
+                    <div class="tarjeta mt-4 p-4 d-flex flex-column">
+                        <div class="mb-3 cabecera border-bottom border-secondary pb-2">
+                            <h5>🤖 Chat con Ollama</h5>
+                            <small class="text-white-50">Modelo local</small>
+                        </div>
+
+                        <div class="chat flex-grow-1 overflow-y-auto mb-3 pe-2" style="max-height: 500px;">
+                            <div th:if="${#lists.isEmpty(historicoConversacion)}">
+                                <p class="text-white-50 fst-italic">Aún no hay preguntas. ¡Sube un PDF e inicia la
+                                    conversación!</p>
+                            </div>
+                            <div th:each="mensaje : ${historicoConversacion}" class="mb-3">
+
+                                <div th:if="${mensaje.startsWith('Usuario:')}"
+                                    class="d-flex justify-content-end align-items-start mb-2">
+                                    <div class="mensaje bg-primary text-white p-3 rounded-3 me-2"
+                                        style="max-width: 75%;">
+                                        <span th:text="${mensaje.substring(9)}">Mensaje del usuario</span>
+                                    </div>
+                                    <div class="avatar bg-primary text-white rounded-circle d-flex align-items-center justify-content-center flex-shrink-0"
+                                        style="width: 40px; height: 40px;">
+                                        U
+                                    </div>
+                                </div>
+
+                                <div th:if="${mensaje.startsWith('Ollama:')}"
+                                    class="d-flex justify-content-start align-items-start mb-2">
+                                    <div class="avatar bg-success text-white rounded-circle d-flex align-items-center justify-content-center me-2 flex-shrink-0"
+                                        style="width: 40px; height: 40px;">
+                                        IA
+                                    </div>
+                                    <div class="mensaje bg-secondary text-white p-3 rounded-3" style="max-width: 75%;">
+                                        <span th:text="${mensaje.substring(8)}">Respuesta de Ollama</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="footer mt-auto">
+                            <form id="form-chat" th:action="@{/ia}" method="post" class="w-100 ">
+                                <div class="input-group">
+                                    <input type="text" name="mensaje"
+                                        class="form-control bg-dark text-white border-secondary"
+                                        placeholder="Escribe tu pregunta para Ollama..." required autocomplete="off">
+                                    <button type="submit" class="btn btn-dark px-4 border-secondary">Enviar</button>
+                                </div>
+                            </form>
+                            <div id="cargando-respuesta" class="d-none text-center py-2">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Ollama esta procesando tu pregunta...</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <script>
+                document.getElementById('form-chat').addEventListener('submit', function () {
+                    // 1. Ocultamos el formulario para que el usuario no vuelva a escribir
+                    this.classList.add('d-none');
+
+                    // 2. Quitamos la clase 'd-none' al bloque de carga para que se muestre
+                    document.getElementById('cargando-respuesta').classList.remove('d-none');
+                });
+            </script>
+</body>
+
+</html>
