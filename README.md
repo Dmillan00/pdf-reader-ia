@@ -16,7 +16,6 @@ Aplicación web desarrollada con **Spring Boot** que permite a los usuarios subi
 - [📦 Instalación](#-instalación)
 - [🚀 Ejecución](#-ejecución)
 - [📖 Funcionamiento](#-funcionamiento)
-- [👨‍💻 Autor](#-Autor)
 
 ---
 
