@@ -1,67 +1,117 @@
+/*ESTILO GENERAL*/
+
 body {
-  background-color: #264653 !important;
-  color: #a9ddd6 !important;
+  background-color: #141414 !important;
+  color: #141414 !important;
 }
+
+/* Evitamos que el selector genérico rompa los formularios pequeños como el de reiniciar */
+form {
+  background-color: transparent;
+  padding: 0;
+  box-shadow: none;
+}
+
+/*ESTILO GENERAL*/
+
+/*CABECERA*/
 
 header {
-  text-align: center;
   padding: 20px;
-  background-color: #13242a;
+  background-color: #1E293B;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
 }
 
-.btn{
-    background-color: #13242a;
+
+header.navbar {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  border-bottom: 1px solid white !important; /* Cambiado white por el gris de la paleta para que quede integrado y sutil */
 }
 
-/* Estilos para el contenedor de subir PDF */
+
+
+/*CABECERA*/
+
+
+/* CONTENEDORES Y TARJETAS */
+
+/* Unificamos el comportamiento de ambas tarjetas para que tengan la misma altura */
+.contenedor-subir-pdf, 
+.tarjeta {
+  background-color: #0892A5 !important;
+  border: 1px solid #334155 !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2) !important;
+}
+
 .contenedor-subir-pdf {
+  min-height: 400px;
   padding: 30px;
-  border-radius: 15px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  margin-right: 20px;
 }
 
-.subir-pdf {
-  background-color: #23424e;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-form {
-   background-color: #264653;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Estilos para el contenedor de chat */
 .tarjeta {
   display: flex;
   flex-direction: column;
-  height: 750px;
-  width: 100%;
-  max-width: 800px;
-  background-color: #13242a;
   padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  min-height: 400px;
+   
 }
+
+/* CONTENEDORES Y TARJETAS */
+
+
+/* INTERFAZ DE MENSAJES (GLOBOS DEL CHAT) */
 
 .chat {
   flex-grow: 1;
   overflow-y: auto;
-    min-height: 400px;
-  padding-right: 5px;
+  padding-right: 8px;
+}
+
+.texto-chat{
+  color: #141414;
 }
 
 .cabecera {
-  color: white;
   font-size: 1.25rem;
   font-weight: bold;
   padding-bottom: 10px;
 }
 
-.footer {
-  margin-top: auto;
+/* Globo personalizado del Usuario */
+.user-bubble {
+  background-color: #0EA5E9 !important;
+  border-radius: 12px 12px 0 12px !important;
 }
+
+/* Globo personalizado de la IA */
+.ia-bubble {
+  background-color: #98C3EC !important;
+  border-left: 4px solid #141414 !important;
+  border-radius: 12px 12px 12px 0 !important;
+}
+
+/* INTERFAZ DE MENSAJES (GLOBOS DEL CHAT) */
+
+
+/*FOOTER */
+
+footer {
+  margin-top: auto;
+  background-color: #1E293B;
+  width: 100%;
+  font-size: 1rem !important;
+  color: white;
+}
+
+/* Efecto hover limpio para los botones de las redes sociales */
+footer .btn-floating {
+  transition: all 0.3s ease;
+}
+
+footer .btn-floating:hover {
+  background-color: #F8FAFC !important;
+  color: #141414 !important;
+}
+
+/*FOOTER */
